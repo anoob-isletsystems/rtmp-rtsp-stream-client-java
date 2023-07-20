@@ -65,7 +65,7 @@ public class TextureModeRtspActivity extends AppCompatActivity
     super.onCreate(savedInstanceState);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     setContentView(R.layout.activity_texture_mode);
-    folder = PathUtils.getRecordPath();
+//    folder = PathUtils.getRecordPath();
     textureView = findViewById(R.id.textureView);
     button = findViewById(R.id.b_start_stop);
     button.setOnClickListener(this);

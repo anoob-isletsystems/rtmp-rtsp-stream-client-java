@@ -41,7 +41,7 @@
     <activity
         android:name=".customexample.RtmpActivity"
         android:label="@string/rtmp_streamer"
-        android:screenOrientation="portrait"
+        android:screenOrientation="landscape"
         />
     <activity
         android:name=".customexample.RtspActivity"
@@ -91,7 +91,7 @@
     <activity
         android:name=".openglexample.OpenGlRtmpActivity"
         android:label="@string/opengl_rtmp"
-        android:screenOrientation="portrait"
+        android:screenOrientation="landscape"
         />
     <activity
         android:name=".openglexample.OpenGlRtspActivity"

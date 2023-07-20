@@ -66,8 +66,8 @@ public class Camera1ApiManager implements Camera.PreviewCallback, Camera.FaceDet
   private Context context;
 
   //default parameters for camera
-  private int width = 640;
-  private int height = 480;
+  private int width = 1280;//640
+  private int height = 720;//480
   private int fps = 30;
   private int rotation = 0;
   private int imageFormat = ImageFormat.NV21;
@@ -585,7 +585,7 @@ public class Camera1ApiManager implements Camera.PreviewCallback, Camera.FaceDet
       lanternEnable = false;
     }
   }
-  
+
   private Camera.AutoFocusCallback autoFocusTakePictureCallback = new Camera.AutoFocusCallback() {
     @Override
     public void onAutoFocus(boolean success, Camera camera) {

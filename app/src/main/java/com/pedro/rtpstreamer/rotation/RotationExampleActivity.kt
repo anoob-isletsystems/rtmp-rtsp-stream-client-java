@@ -58,19 +58,19 @@ class RotationExampleActivity: AppCompatActivity(), SurfaceHolder.Callback {
         binding.bStartStop.setText(R.string.start_button)
       }
     }
-    binding.bRecord.setOnClickListener {
-      if (service?.isRecording() != true) {
-        val folder = PathUtils.getRecordPath()
-        if (!folder.exists()) folder.mkdir()
-        val sdf = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
-        val fileName = sdf.format(Date())
-        service?.startRecord("${folder.absolutePath}/$fileName.mp4")
-        binding.bRecord.setText(R.string.stop_record)
-      } else {
-        service?.stopRecord()
-        binding.bRecord.setText(R.string.start_record)
-      }
-    }
+//    binding.bRecord.setOnClickListener {
+//      if (service?.isRecording() != true) {
+//        val folder = PathUtils.getRecordPath()
+//        if (!folder.exists()) folder.mkdir()
+//        val sdf = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
+//        val fileName = sdf.format(Date())
+//        service?.startRecord("${folder.absolutePath}/$fileName.mp4")
+//        binding.bRecord.setText(R.string.stop_record)
+//      } else {
+//        service?.stopRecord()
+//        binding.bRecord.setText(R.string.start_record)
+//      }
+//    }
     binding.switchCamera.setOnClickListener {
       service?.switchCamera()
     }

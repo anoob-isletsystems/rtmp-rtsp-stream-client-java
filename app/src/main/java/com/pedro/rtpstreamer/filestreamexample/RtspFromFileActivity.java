@@ -73,7 +73,7 @@ public class RtspFromFileActivity extends AppCompatActivity
     super.onCreate(savedInstanceState);
     getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     setContentView(R.layout.activity_from_file);
-    folder = PathUtils.getRecordPath();
+//    folder = PathUtils.getRecordPath();
     button = findViewById(R.id.b_start_stop);
     bSelectFile = findViewById(R.id.b_select_file);
     button.setOnClickListener(this);

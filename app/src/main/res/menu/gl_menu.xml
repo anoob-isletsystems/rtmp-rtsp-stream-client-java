@@ -183,4 +183,20 @@
           />
     </menu>
   </item>
+  <item android:title="@string/set_url">
+    <menu>
+      <item
+          android:id="@+id/mux"
+          android:title="@string/mux"
+          />
+      <item
+          android:id="@+id/youtube"
+          android:title="@string/youtube"
+          />
+      <item
+          android:id="@+id/mux_secured"
+          android:title="@string/mux_secured"
+          />
+    </menu>
+  </item>
 </menu>

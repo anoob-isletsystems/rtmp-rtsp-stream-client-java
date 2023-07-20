@@ -81,6 +81,11 @@
   <string name="temperature">Temperature</string>
   <string name="text">Text</string>
   <string name="zebra">Zebra</string>
+  <!--url-->
+  <string name="set_url">Set Url</string>
+  <string name="mux">Mux Rtmp Url</string>
+  <string name="youtube">Youtube Rtmp Url</string>
+  <string name="mux_secured">Mux Rtmps Url</string>
   <!--drawer-->
   <string name="drawer_title">Options</string>
   <string name="protocols">Protocol</string>

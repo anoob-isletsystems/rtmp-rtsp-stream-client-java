@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-
+apply plugin: 'com.google.gms.google-services'
 android {
   compileSdkVersion 33
 
   defaultConfig {
     applicationId "com.pedro.rtpstreamer"
-    minSdkVersion 16
+    minSdkVersion 19
     targetSdkVersion 33
     versionCode version_code
     versionName version_name
+    multiDexEnabled true
   }
   buildTypes {
     release {
@@ -25,7 +26,12 @@ android {
 
 dependencies {
   implementation project(':rtplibrary')
+  implementation 'androidx.core:core-ktx:1.8.0'
   implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+  implementation platform('com.google.firebase:firebase-bom:32.1.1')
+//  implementation("com.google.firebase:firebase-database")
+  implementation 'com.android.support:multidex:2.0.1'
+  implementation 'com.google.firebase:firebase-database-ktx:20.1.0'
   implementation 'com.google.android.material:material:1.8.0'
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
