@@ -182,7 +182,7 @@ class TextStreamObject : StreamObjectBase() {
         }
         val totalWidth = widthMax + widthMax1 + widthMax2 + 10
         val height = (baseline + paint.descent() + 0.5f).toInt() * noOfLines
-        val image = Bitmap.createBitmap(640, 480, Bitmap.Config.ARGB_8888)
+        val image = Bitmap.createBitmap(1280, 720, Bitmap.Config.ARGB_8888)
 
         val canvas = Canvas(image)
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
@@ -190,7 +190,7 @@ class TextStreamObject : StreamObjectBase() {
         canvas.drawRect(
             (0).toFloat(),
             0f,
-            (640).toFloat(),
+            (1280).toFloat(),
             height.toFloat(),
             paint1
         )
