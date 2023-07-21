@@ -32,6 +32,7 @@ import com.pedro.encoder.R;
 import com.pedro.encoder.input.gl.Sprite;
 import com.pedro.encoder.utils.gl.GlUtil;
 import com.pedro.encoder.utils.gl.TranslateTo;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;

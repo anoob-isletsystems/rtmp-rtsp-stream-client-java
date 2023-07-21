@@ -461,7 +461,7 @@ class OpenGlRtmpActivity : AppCompatActivity(), ConnectCheckerRtmp, View.OnClick
                 true
             }
             R.id.youtube -> {
-                etUrl?.setText("rtmp://a.rtmp.youtube.com/live2/pc65-aev0-vy3t-r5z9-egqy" ,TextView.BufferType.EDITABLE)
+                etUrl?.setText("rtmp://a.rtmp.youtube.com/live2/" ,TextView.BufferType.EDITABLE)
                 true
             }
             R.id.mux_secured -> {
