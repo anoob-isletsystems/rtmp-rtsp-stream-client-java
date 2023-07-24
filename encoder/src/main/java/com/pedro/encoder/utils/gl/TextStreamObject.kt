@@ -278,17 +278,17 @@ class TextStreamObject : StreamObjectBase() {
             paint1
         )
         for (i in lines.indices) {
-            canvas.drawText(lines[noOfLines-i-1], 10f, 720-( (baseline + paint.descent() + 0.5f) * i), paint)
+            canvas.drawText(lines[noOfLines-i-1], 10f, 715-( (baseline + paint.descent() + 0.5f) * i), paint)
             canvas.drawText(
                 lines1[noOfLines-i-1],
                 (widthMax +(totalWidth/2)).toFloat(),
-                720-((baseline + paint.descent() + 0.5f) * i),
+                715-((baseline + paint.descent() + 0.5f) * i),
                 paint
             )
             canvas.drawText(
                 lines2[noOfLines-i-1],
                 (widthMax + widthMax1 + (totalWidth)).toFloat(),
-                720-((baseline + paint.descent() + 0.5f) * i),
+                715-((baseline + paint.descent() + 0.5f) * i),
                 paint
             )
         }
