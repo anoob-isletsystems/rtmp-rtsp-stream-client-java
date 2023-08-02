@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "853152343869",
+    "project_id": "live-stream-a8631",
+    "storage_bucket": "live-stream-a8631.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:853152343869:android:c2acc94cc727a124e6c754",
+        "android_client_info": {
+          "package_name": "com.pedro.rtpstreamer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "853152343869-a18t5utaa7988rk1rggfsnklnm4o5dgt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDATlzYs2p30itHjs3pTkC3wA_3o9gfdGI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "853152343869-a18t5utaa7988rk1rggfsnklnm4o5dgt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
