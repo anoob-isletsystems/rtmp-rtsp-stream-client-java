@@ -23,6 +23,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.PorterDuff
 import android.graphics.Typeface
+import android.os.Build
 import android.util.DisplayMetrics
 import android.util.Log
 import com.pedro.encoder.R
@@ -239,8 +240,14 @@ class TextStreamObject : StreamObjectBase() {
         val lines1 = text1.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         val lines2 = text2.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
         val paint1 = Paint()
-        paint1.color = Color.BLACK
+        paint1.color = Color.rgb(39, 69, 245)
         paint1.strokeWidth = 2f
+        val paint2 = Paint()
+        paint2.color = Color.rgb(245, 39, 145)
+        paint2.strokeWidth = 2f
+        val paint3 = Paint()
+        paint3.color = Color.rgb(46, 245, 39)
+        paint3.strokeWidth = 2f
 //        paint1.style = Paint.Style.STROKE
         val noOfLines = lines.size
         val baseline = -paint.ascent() // ascent() is negative
@@ -270,15 +277,43 @@ class TextStreamObject : StreamObjectBase() {
         if(bitmap!=null) {
         canvas.drawBitmap(bitmap,1180f,0f,paint)
         }
-        canvas.drawRect(
-            (0).toFloat(),
-            (720-height).toFloat(),
-            (1280).toFloat(),
-            (720).toFloat(),
-            paint1
-        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if(lines[0]!=' '.toString()){
+                canvas.drawRoundRect(
+                        (0).toFloat(),
+                        (720-height).toFloat(),
+                        (widthMax+(totalWidth/2)-30).toFloat(),
+                        (720).toFloat(),
+                        (16).toFloat(),
+                        (16).toFloat(),
+                        paint1
+                )
+
+                            }
+
+            canvas.drawRoundRect(
+                    (widthMax+(totalWidth/2)-20).toFloat(),
+                    (720-height).toFloat(),
+                    (widthMax+widthMax1+(totalWidth/2)+20).toFloat(),
+                    (720).toFloat(),
+                    (16).toFloat(),
+                    (16).toFloat(),
+                    paint2
+            )
+            if(lines2[0]!=' '.toString()){
+            canvas.drawRoundRect(
+                    (widthMax+widthMax1+(totalWidth/2)+30).toFloat(),
+                    (720-height).toFloat(),
+                    (1280).toFloat(),
+                    (720).toFloat(),
+                    (16).toFloat(),
+                    (16).toFloat(),
+                    paint3
+            )
+            }
+        }
         for (i in lines.indices) {
-            canvas.drawText(lines[noOfLines-i-1], 10f, 715-( (baseline + paint.descent() + 0.5f) * i), paint)
+            canvas.drawText(lines[noOfLines-i-1], 20f, 715-( (baseline + paint.descent() + 0.5f) * i), paint)
             canvas.drawText(
                 lines1[noOfLines-i-1],
                 (widthMax +(totalWidth/2)).toFloat(),
