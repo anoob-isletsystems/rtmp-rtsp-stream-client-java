@@ -59,7 +59,7 @@ public class VideoEncoder extends BaseEncoder implements GetCameraData {
   private int width = 1280;//640
   private int height = 720;//480
   private int fps = 30;
-  private int bitRate = 1200 * 1024; //in kbps
+  private int bitRate = 500 * 1024; //in kbps 1200
   private int rotation = 90;//90
   private int iFrameInterval = 2;
   //for disable video

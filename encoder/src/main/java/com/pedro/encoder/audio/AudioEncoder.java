@@ -38,8 +38,8 @@ import java.util.List;
 public class AudioEncoder extends BaseEncoder implements GetMicrophoneData {
 
   private final GetAacData getAacData;
-  private int bitRate = 64 * 1024;  //in kbps
-  private int sampleRate = 32000; //in hz
+  private int bitRate = 64 * 1024;  //in kbps 64
+  private int sampleRate = 32000; //in hz 32000
   private int maxInputSize = 0;
   private boolean isStereo = true;
   private GetFrame getFrame;

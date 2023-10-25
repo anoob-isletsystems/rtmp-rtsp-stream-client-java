@@ -70,7 +70,7 @@ public class Camera1ApiManager implements Camera.PreviewCallback, Camera.FaceDet
   private int height = 720;//480
   private int fps = 30;
   private int rotation = 0;
-  private int imageFormat = ImageFormat.NV21;
+  private int imageFormat = ImageFormat.NV21;//ImageFormat.NV21
   private byte[] yuvBuffer;
   private List<Camera.Size> previewSizeBack;
   private List<Camera.Size> previewSizeFront;
