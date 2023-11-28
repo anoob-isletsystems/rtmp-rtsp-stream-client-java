@@ -34,6 +34,7 @@ class TextObjectFilterRender : BaseObjectFilterRender() {
     private var textColor = 0
     private var typeface: Typeface? = null
     private var bitmap: Bitmap? = null
+    private var bitmap1:Bitmap? =null
 
     init {
         streamObject = TextStreamObject()
@@ -79,7 +80,8 @@ class TextObjectFilterRender : BaseObjectFilterRender() {
         textSize: Float,
         textColor: Int,
         typeface: Typeface?,
-        bitmap: Bitmap
+        bitmap: Bitmap,
+        bitmap1: Bitmap?
     ) {
         this.text = text
         this.text1 = text1
@@ -88,10 +90,11 @@ class TextObjectFilterRender : BaseObjectFilterRender() {
         this.textColor = textColor
         this.typeface = typeface
         this.bitmap=bitmap
+        this.bitmap1= bitmap1
         if (text != null) {
             if (text1 != null) {
                 if (text2 != null) {
-                    (streamObject as TextStreamObject).load(text, text1, text2, textSize, textColor, typeface,bitmap)
+                    (streamObject as TextStreamObject).load(text, text1, text2, textSize, textColor, typeface,bitmap,bitmap1)
                 }
             }
         }

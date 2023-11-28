@@ -69,10 +69,11 @@ class TextStreamObject : StreamObjectBase() {
         textSize: Float,
         textColor: Int,
         typeface: Typeface?,
-        bitmap: Bitmap?
+        bitmap: Bitmap?,
+        bitmap1:Bitmap?
     ) {
         numFrames = 1
-        imageBitmap = textAsBitmap(text, text1, text2, textSize, textColor, typeface,bitmap)
+        imageBitmap = textAsBitmap(text, text1, text2, textSize, textColor, typeface,bitmap,bitmap1)
         Log.i(TAG, "finish load text")
     }
     override fun recycle() {
@@ -228,7 +229,8 @@ class TextStreamObject : StreamObjectBase() {
         textSize: Float,
         textColor: Int,
         typeface: Typeface?,
-        bitmap: Bitmap?
+        bitmap: Bitmap?,
+        bitmap1: Bitmap?
     ): Bitmap {
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
         paint.textSize = textSize
@@ -276,6 +278,13 @@ class TextStreamObject : StreamObjectBase() {
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
         if(bitmap!=null) {
         canvas.drawBitmap(bitmap,1180f,0f,paint)
+        }
+        if (bitmap1!=null){
+            val bitmapHeight=bitmap1.height
+            val bitmapWidth =bitmap1.width
+            val heightAdjust=(720-bitmapHeight)/2
+            val widthAdjust=(1280-bitmapWidth)/2
+            canvas.drawBitmap(bitmap1,widthAdjust.toFloat(),heightAdjust.toFloat(),paint)
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if(lines[0]!=' '.toString()){
