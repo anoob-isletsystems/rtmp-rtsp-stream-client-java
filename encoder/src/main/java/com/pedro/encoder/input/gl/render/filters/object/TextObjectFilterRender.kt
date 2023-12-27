@@ -36,6 +36,9 @@ class TextObjectFilterRender : BaseObjectFilterRender() {
     private var bitmap: Bitmap? = null
     private var bitmap1:Bitmap? =null
     private var scorecard: String? =null
+    private var scoreOverlay: Bitmap? =null
+    private var battingTeamImage: Bitmap? = null
+    private var bowlingTeamImage: Bitmap? =null
     init {
         streamObject = TextStreamObject()
     }
@@ -125,6 +128,74 @@ class TextObjectFilterRender : BaseObjectFilterRender() {
             if (text1 != null) {
                 if (text2 != null) {
                     (streamObject as TextStreamObject).load(text, text1, text2, textSize, textColor, typeface,bitmap,bitmap1,scorecard)
+                }
+            }
+        }
+        //    ((MultilineTextStreamObject) streamObject).load(text, textSize, textColor, typeface);
+        shouldLoad = true
+    }
+    fun setMultiText(
+        text: String?,
+        text1: String?,
+        text2: String?,
+        textSize: Float,
+        textColor: Int,
+        typeface: Typeface?,
+        bitmap: Bitmap,
+        bitmap1: Bitmap?,
+        scorecard: String?,
+        scoreOverlay: Bitmap?
+    ) {
+        this.text = text
+        this.text1 = text1
+        this.text2 = text2
+        this.textSize = textSize
+        this.textColor = textColor
+        this.typeface = typeface
+        this.bitmap=bitmap
+        this.bitmap1= bitmap1
+        this.scorecard=scorecard
+        this.scoreOverlay=scoreOverlay
+        if (text != null) {
+            if (text1 != null) {
+                if (text2 != null) {
+                    (streamObject as TextStreamObject).load(text, text1, text2, textSize, textColor, typeface,bitmap,bitmap1,scorecard,scoreOverlay)
+                }
+            }
+        }
+        //    ((MultilineTextStreamObject) streamObject).load(text, textSize, textColor, typeface);
+        shouldLoad = true
+    }
+    fun setMultiText(
+        text: String?,
+        text1: String?,
+        text2: String?,
+        textSize: Float,
+        textColor: Int,
+        typeface: Typeface?,
+        bitmap: Bitmap,
+        bitmap1: Bitmap?,
+        scorecard: String?,
+        scoreOverlay: Bitmap?,
+        battingTeamImage: Bitmap?,
+        bowlingTeamImage: Bitmap?
+    ) {
+        this.text = text
+        this.text1 = text1
+        this.text2 = text2
+        this.textSize = textSize
+        this.textColor = textColor
+        this.typeface = typeface
+        this.bitmap=bitmap
+        this.bitmap1= bitmap1
+        this.scorecard=scorecard
+        this.scoreOverlay=scoreOverlay
+        this.battingTeamImage=battingTeamImage
+        this.bowlingTeamImage=bowlingTeamImage
+        if (text != null) {
+            if (text1 != null) {
+                if (text2 != null) {
+                    (streamObject as TextStreamObject).load(text, text1, text2, textSize, textColor, typeface,bitmap,bitmap1,scorecard,scoreOverlay,battingTeamImage,bowlingTeamImage)
                 }
             }
         }

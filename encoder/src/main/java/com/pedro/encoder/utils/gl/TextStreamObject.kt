@@ -91,6 +91,40 @@ class TextStreamObject : StreamObjectBase() {
         imageBitmap = textAsBitmap(text, text1, text2, textSize, textColor, typeface,bitmap,bitmap1, scorecard)
         Log.i(TAG, "finish load text")
     }
+    fun load(
+        text: String,
+        text1: String,
+        text2: String,
+        textSize: Float,
+        textColor: Int,
+        typeface: Typeface?,
+        bitmap: Bitmap?,
+        bitmap1:Bitmap?,
+        scorecard: String?,
+        scoreOverlay: Bitmap?,
+    ) {
+        numFrames = 1
+        imageBitmap = textAsBitmap(text, text1, text2, textSize, textColor, typeface,bitmap,bitmap1, scorecard, scoreOverlay)
+        Log.i(TAG, "finish load text")
+    }
+    fun load(
+        text: String,
+        text1: String,
+        text2: String,
+        textSize: Float,
+        textColor: Int,
+        typeface: Typeface?,
+        bitmap: Bitmap?,
+        bitmap1:Bitmap?,
+        scorecard: String?,
+        scoreOverlay: Bitmap?,
+        battingTeamImage: Bitmap?,
+        bowlingTeamImage: Bitmap?,
+    ) {
+        numFrames = 1
+        imageBitmap = textAsBitmap(text, text1, text2, textSize, textColor, typeface,bitmap,bitmap1, scorecard, scoreOverlay,battingTeamImage,bowlingTeamImage)
+        Log.i(TAG, "finish load text")
+    }
     override fun recycle() {
         if (imageBitmap != null && !imageBitmap!!.isRecycled) imageBitmap!!.recycle()
     }
@@ -514,7 +548,7 @@ class TextStreamObject : StreamObjectBase() {
                 val teamShortName1=teamShortName[0].substring(0,
                     teamShortName[0].length.coerceAtMost(4)
                 )
-                val teamShortName2=teamShortName[1].substring(0,teamShortName[0].length.coerceAtMost(4))
+                val teamShortName2=teamShortName[1].substring(0,teamShortName[1].length.coerceAtMost(4))
                 val teamShortNameWidth=(teamShortNamePaint.measureText(teamShortName2) + 0.5f).toInt()
                 canvas.drawText(teamShortName1,530f,658+(teamShortNamePaint.descent()+0.75f),teamShortNamePaint)
                 canvas.drawText(teamShortName2,(750-teamShortNameWidth).toFloat(),658+(teamShortNamePaint.descent()+0.75f),teamShortNamePaint)
@@ -550,6 +584,345 @@ class TextStreamObject : StreamObjectBase() {
                     thisOverWidth+=currentWidth+3.0f
                 }
             }
+        }
+        else{
+            val scoreTextOffset=(820-playerNamePaint.measureText(lines1[0]))/2
+            canvas.drawText(lines1[0], 230+scoreTextOffset, 670+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+        }
+
+
+//        canvas.drawRect(0f, 0f, widthMax.toFloat(), height.toFloat(), paint1)
+//        canvas.drawRect(
+//            widthMax.toFloat(),
+//            0f,
+//            (widthMax + widthMax1).toFloat(),
+//            height.toFloat(),
+//            paint1
+//        )
+
+        return image
+    }
+    private fun textAsBitmap(
+        text: String,
+        text1: String,
+        text2: String,
+        textSize: Float,
+        textColor: Int,
+        typeface: Typeface?,
+        bitmap: Bitmap?,
+        bitmap1: Bitmap?,
+        scorecard: String?,
+        scoreOverlay: Bitmap?,
+    ): Bitmap {
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG) //teamNamePaint
+        paint.textSize = textSize
+        paint.color = Color.BLACK
+        paint.alpha = 255
+        val playerNamePaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        playerNamePaint.textSize = 20f
+        playerNamePaint.color = textColor
+        playerNamePaint.alpha = 255
+        val teamShortNamePaint = Paint(Paint.ANTI_ALIAS_FLAG) //teamNamePaint
+        teamShortNamePaint.textSize = 20f
+        teamShortNamePaint.color = Color.BLACK
+        teamShortNamePaint.alpha = 255
+        val thisOverPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        thisOverPaint.textSize = 30f
+        thisOverPaint.color = textColor
+        thisOverPaint.alpha = 255
+        val thisOverPaint1 = Paint(Paint.ANTI_ALIAS_FLAG)
+        thisOverPaint1.textSize = 24f
+        thisOverPaint1.color = textColor
+        thisOverPaint1.alpha = 255
+        val thisOverPaint2 = Paint(Paint.ANTI_ALIAS_FLAG)
+        thisOverPaint2.textSize = 14f
+        thisOverPaint2.color = textColor
+        thisOverPaint2.alpha = 255
+        val bottomMessagePaint = Paint(Paint.ANTI_ALIAS_FLAG) //teamNamePaint
+        bottomMessagePaint.textSize = 16f
+        bottomMessagePaint.color = Color.BLACK
+        bottomMessagePaint.alpha = 255
+        val scoreOverlayPaint=Paint()
+        scoreOverlayPaint.alpha=100
+        if (typeface != null) {
+            paint.typeface = typeface
+            playerNamePaint.typeface=typeface
+            teamShortNamePaint.typeface=typeface
+            thisOverPaint.typeface=typeface
+            thisOverPaint1.typeface=typeface
+            thisOverPaint2.typeface=typeface
+            bottomMessagePaint.typeface=typeface
+        }
+        paint.textAlign = Paint.Align.LEFT
+        playerNamePaint.textAlign=Paint.Align.LEFT
+        teamShortNamePaint.textAlign= Paint.Align.LEFT
+        thisOverPaint.textAlign= Paint.Align.LEFT
+        thisOverPaint1.textAlign= Paint.Align.LEFT
+        thisOverPaint2.textAlign= Paint.Align.LEFT
+        bottomMessagePaint.textAlign= Paint.Align.LEFT
+        val thisOverRectPaint = Paint ()
+        thisOverRectPaint.color= Color.rgb(229,28,187)
+        thisOverRectPaint.strokeWidth = 2f
+        val lines = text.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray() //batter
+        val lines1 = text1.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()//score+over
+        val lines2 = text2.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()//bowler+thisOver
+
+        val image = Bitmap.createBitmap(1280, 720, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(image)
+        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+        if(bitmap!=null) {
+            canvas.drawBitmap(bitmap,1180f,0f,paint)
+        }
+        if (bitmap1!=null){
+            val bitmapHeight=bitmap1.height
+            val bitmapWidth =bitmap1.width
+            val heightAdjust=(720-bitmapHeight)/2
+            val widthAdjust=(1280-bitmapWidth)/2
+            canvas.drawBitmap(bitmap1,widthAdjust.toFloat(),heightAdjust.toFloat(),paint)
+        }
+        if (scoreOverlay!=null){
+            canvas.drawBitmap(scoreOverlay,((1280-scoreOverlay.width)/2).toFloat(),625f,scoreOverlayPaint)
+        }
+        if(lines2[0]!=' '.toString()){
+            if(scorecard!=null){
+                val lines3 = scorecard.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val teamFullName=lines3[0].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val teamShortName=lines3[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                canvas.drawText(teamFullName[0], 10f, 670+(paint.descent()+0.75f), paint)
+                val teamNameWidth = (paint.measureText(teamFullName[1]) + 0.5f).toInt()
+                canvas.drawText(teamFullName[1], (1270-teamNameWidth).toFloat(), 670+(paint.descent()+0.75f), paint)
+                val teamShortName1=teamShortName[0].substring(0,
+                    teamShortName[0].length.coerceAtMost(4)
+                )
+                val teamShortName2=teamShortName[1].substring(0,teamShortName[1].length.coerceAtMost(4))
+                val teamShortNameWidth=(teamShortNamePaint.measureText(teamShortName2) + 0.5f).toInt()
+                canvas.drawText(teamShortName1,530f,658+(teamShortNamePaint.descent()+0.75f),teamShortNamePaint)
+                canvas.drawText(teamShortName2,(750-teamShortNameWidth).toFloat(),658+(teamShortNamePaint.descent()+0.75f),teamShortNamePaint)
+            }
+            canvas.drawText(lines[0], 260f, 650+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            canvas.drawText(lines[1], 260f, 690+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            canvas.drawText(lines2[0], 780f, 650+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+//        canvas.drawText(lines2[1], 780f, 690+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            val scoreTextOffset=(110-playerNamePaint.measureText(lines1[0]))/2
+            canvas.drawText(lines1[0], 585+scoreTextOffset, 658+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            val bottomMessageOffset=(260-bottomMessagePaint.measureText(lines1[1]))/2
+            canvas.drawText(lines1[1], 510+bottomMessageOffset, 695+( bottomMessagePaint.descent() + 0.75f) , bottomMessagePaint)
+            val thisOverString=lines2[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            var thisOverWidth=0.0f
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                for(i in thisOverString.indices){
+                    val radius = 18f
+
+                    canvas.drawCircle(798+thisOverWidth,690f,radius,thisOverRectPaint)
+                    if(thisOverString[i].length==1){
+                        val xCoordinate=798+thisOverWidth-((thisOverPaint.measureText(thisOverString[i]))/2)
+                        val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                        canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint)
+                    }
+                    if(thisOverString[i].length==2){
+                        val xCoordinate=798+thisOverWidth-((thisOverPaint1.measureText(thisOverString[i]))/2)
+                        val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                        canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint1)
+                    }
+                    if(thisOverString[i].length==3){
+                        val xCoordinate=798+thisOverWidth-17
+                        val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                        canvas.drawText(thisOverString[i].first().toString(),xCoordinate,yCoordinate,thisOverPaint1)
+                        canvas.drawText(thisOverString[i].substring(1,3),xCoordinate-1+(thisOverPaint1.measureText(thisOverString[i].first().toString())),yCoordinate,thisOverPaint2)
+                    }
+//                    canvas.drawRoundRect(
+//                        780+thisOverWidth,
+//                        (676).toFloat(),
+//                        780+thisOverWidth+currentWidth,
+//                        (704).toFloat(),
+//                        (16).toFloat(),
+//                        (16).toFloat(),
+//                        thisOverRectPaint
+//                    )
+//                    canvas.drawText(thisOverString[i],780+thisOverWidth+4.5f,690+(thisOverPaint.descent()+0.75f),thisOverPaint)
+                    thisOverWidth+=43f
+                }
+            }
+
+//            canvas.drawText("0w",798-((thisOverPaint1.measureText("0w"))/2),690+(thisOverPaint1.descent()+2.25f),thisOverPaint1)
+        }
+        else{
+            val scoreTextOffset=(820-playerNamePaint.measureText(lines1[0]))/2
+            canvas.drawText(lines1[0], 230+scoreTextOffset, 670+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+        }
+
+
+//        canvas.drawRect(0f, 0f, widthMax.toFloat(), height.toFloat(), paint1)
+//        canvas.drawRect(
+//            widthMax.toFloat(),
+//            0f,
+//            (widthMax + widthMax1).toFloat(),
+//            height.toFloat(),
+//            paint1
+//        )
+
+        return image
+    }
+    private fun textAsBitmap(
+        text: String,
+        text1: String,
+        text2: String,
+        textSize: Float,
+        textColor: Int,
+        typeface: Typeface?,
+        bitmap: Bitmap?,
+        bitmap1: Bitmap?,
+        scorecard: String?,
+        scoreOverlay: Bitmap?,
+        battingTeamImage: Bitmap?,
+        bowlingTeamImage: Bitmap?,
+    ): Bitmap {
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG) //teamNamePaint
+        paint.textSize = textSize
+        paint.color = Color.BLACK
+        paint.alpha = 255
+        val playerNamePaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        playerNamePaint.textSize = 20f
+        playerNamePaint.color = textColor
+        playerNamePaint.alpha = 255
+        val teamShortNamePaint = Paint(Paint.ANTI_ALIAS_FLAG) //teamNamePaint
+        teamShortNamePaint.textSize = 20f
+        teamShortNamePaint.color = Color.BLACK
+        teamShortNamePaint.alpha = 255
+        val thisOverPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        thisOverPaint.textSize = 30f
+        thisOverPaint.color = textColor
+        thisOverPaint.alpha = 255
+        val thisOverPaint1 = Paint(Paint.ANTI_ALIAS_FLAG)
+        thisOverPaint1.textSize = 24f
+        thisOverPaint1.color = textColor
+        thisOverPaint1.alpha = 255
+        val thisOverPaint2 = Paint(Paint.ANTI_ALIAS_FLAG)
+        thisOverPaint2.textSize = 14f
+        thisOverPaint2.color = textColor
+        thisOverPaint2.alpha = 255
+        val bottomMessagePaint = Paint(Paint.ANTI_ALIAS_FLAG) //teamNamePaint
+        bottomMessagePaint.textSize = 16f
+        bottomMessagePaint.color = Color.BLACK
+        bottomMessagePaint.alpha = 255
+        val scoreOverlayPaint=Paint()
+        scoreOverlayPaint.alpha=255
+        if (typeface != null) {
+            paint.typeface = typeface
+            playerNamePaint.typeface=typeface
+            teamShortNamePaint.typeface=typeface
+            thisOverPaint.typeface=typeface
+            thisOverPaint1.typeface=typeface
+            thisOverPaint2.typeface=typeface
+            bottomMessagePaint.typeface=typeface
+        }
+        paint.textAlign = Paint.Align.LEFT
+        playerNamePaint.textAlign=Paint.Align.LEFT
+        teamShortNamePaint.textAlign= Paint.Align.LEFT
+        thisOverPaint.textAlign= Paint.Align.LEFT
+        thisOverPaint1.textAlign= Paint.Align.LEFT
+        thisOverPaint2.textAlign= Paint.Align.LEFT
+        bottomMessagePaint.textAlign= Paint.Align.LEFT
+        val thisOverRectPaint = Paint ()
+        thisOverRectPaint.color= Color.rgb(229,28,187)
+        thisOverRectPaint.strokeWidth = 2f
+        val lines = text.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray() //batter
+        val lines1 = text1.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()//score+over
+        val lines2 = text2.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()//bowler+thisOver
+
+        val image = Bitmap.createBitmap(1280, 720, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(image)
+        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
+        if(bitmap!=null) {
+            canvas.drawBitmap(bitmap,1180f,0f,paint)
+        }
+        if (bitmap1!=null){
+            val bitmapHeight=bitmap1.height
+            val bitmapWidth =bitmap1.width
+            val heightAdjust=(720-bitmapHeight)/2
+            val widthAdjust=(1280-bitmapWidth)/2
+            canvas.drawBitmap(bitmap1,widthAdjust.toFloat(),heightAdjust.toFloat(),paint)
+        }
+        if (scoreOverlay!=null){
+            canvas.drawBitmap(scoreOverlay,((1280-scoreOverlay.width)/2).toFloat(),625f,scoreOverlayPaint)
+        }
+        if(lines2[0]!=' '.toString()){
+            if(battingTeamImage!=null){
+                val resizedBattingTeamImage= Bitmap.createScaledBitmap(battingTeamImage,100,60,false)
+                canvas.drawBitmap(resizedBattingTeamImage,90f,640f,paint)
+            }
+            if(bowlingTeamImage!=null){
+                val resizedTeamImage= Bitmap.createScaledBitmap(bowlingTeamImage,100,60,false)
+                canvas.drawBitmap(resizedTeamImage,1090f,640f,paint)
+            }
+            if(scorecard!=null){
+                val lines3 = scorecard.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val teamFullName=lines3[0].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                val teamShortName=lines3[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                if(battingTeamImage==null){
+                    canvas.drawText(teamFullName[0], 10f, 670+(paint.descent()+0.75f), paint)
+                }
+                if(bowlingTeamImage==null){
+                    val teamNameWidth = (paint.measureText(teamFullName[1]) + 0.5f).toInt()
+                    canvas.drawText(teamFullName[1], (1270-teamNameWidth).toFloat(), 670+(paint.descent()+0.75f), paint)
+                }
+                val teamShortName1=teamShortName[0].substring(0,
+                    teamShortName[0].length.coerceAtMost(4)
+                )
+                val teamShortName2=teamShortName[1].substring(0,teamShortName[1].length.coerceAtMost(4))
+                val teamShortNameWidth=(teamShortNamePaint.measureText(teamShortName2) + 0.5f).toInt()
+                canvas.drawText(teamShortName1,530f,658+(teamShortNamePaint.descent()+0.75f),teamShortNamePaint)
+                canvas.drawText(teamShortName2,(750-teamShortNameWidth).toFloat(),658+(teamShortNamePaint.descent()+0.75f),teamShortNamePaint)
+            }
+            canvas.drawText(lines[0], 260f, 650+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            canvas.drawText(lines[1], 260f, 690+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            canvas.drawText(lines2[0], 780f, 650+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+//        canvas.drawText(lines2[1], 780f, 690+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            val scoreTextOffset=(110-playerNamePaint.measureText(lines1[0]))/2
+            canvas.drawText(lines1[0], 585+scoreTextOffset, 658+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            val bottomMessageOffset=(260-bottomMessagePaint.measureText(lines1[1]))/2
+            canvas.drawText(lines1[1], 510+bottomMessageOffset, 695+( bottomMessagePaint.descent() + 0.75f) , bottomMessagePaint)
+            var thisOverString=lines2[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            if (thisOverString.size>6){
+                thisOverString=thisOverString.slice(thisOverString.size-6 until thisOverString.size).toTypedArray()
+            }
+            var thisOverWidth=0.0f
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                for(i in thisOverString.indices){
+                    val radius = 18f
+
+                    canvas.drawCircle(798+thisOverWidth,690f,radius,thisOverRectPaint)
+                    if(thisOverString[i].length==1){
+                        val xCoordinate=798+thisOverWidth-((thisOverPaint.measureText(thisOverString[i]))/2)
+                        val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                        canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint)
+                    }
+                    if(thisOverString[i].length==2){
+                        val xCoordinate=798+thisOverWidth-((thisOverPaint1.measureText(thisOverString[i]))/2)
+                        val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                        canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint1)
+                    }
+                    if(thisOverString[i].length==3){
+                        val xCoordinate=798+thisOverWidth-17
+                        val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                        canvas.drawText(thisOverString[i].first().toString(),xCoordinate,yCoordinate,thisOverPaint1)
+                        canvas.drawText(thisOverString[i].substring(1,3),xCoordinate-1+(thisOverPaint1.measureText(thisOverString[i].first().toString())),yCoordinate,thisOverPaint2)
+                    }
+//                    canvas.drawRoundRect(
+//                        780+thisOverWidth,
+//                        (676).toFloat(),
+//                        780+thisOverWidth+currentWidth,
+//                        (704).toFloat(),
+//                        (16).toFloat(),
+//                        (16).toFloat(),
+//                        thisOverRectPaint
+//                    )
+//                    canvas.drawText(thisOverString[i],780+thisOverWidth+4.5f,690+(thisOverPaint.descent()+0.75f),thisOverPaint)
+                    thisOverWidth+=43f
+                }
+            }
+
+//            canvas.drawText("0w",798-((thisOverPaint1.measureText("0w"))/2),690+(thisOverPaint1.descent()+2.25f),thisOverPaint1)
         }
         else{
             val scoreTextOffset=(820-playerNamePaint.measureText(lines1[0]))/2
