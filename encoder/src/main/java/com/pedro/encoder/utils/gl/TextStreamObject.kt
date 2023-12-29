@@ -882,32 +882,33 @@ class TextStreamObject : StreamObjectBase() {
             canvas.drawText(lines1[0], 585+scoreTextOffset, 658+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
             val bottomMessageOffset=(260-bottomMessagePaint.measureText(lines1[1]))/2
             canvas.drawText(lines1[1], 510+bottomMessageOffset, 695+( bottomMessagePaint.descent() + 0.75f) , bottomMessagePaint)
-            var thisOverString=lines2[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-            if (thisOverString.size>6){
-                thisOverString=thisOverString.slice(thisOverString.size-6 until thisOverString.size).toTypedArray()
-            }
-            var thisOverWidth=0.0f
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                for(i in thisOverString.indices){
-                    val radius = 18f
+            if(lines2.size>1){
+                var thisOverString=lines2[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+                if (thisOverString.size>6){
+                    thisOverString=thisOverString.slice(thisOverString.size-6 until thisOverString.size).toTypedArray()
+                }
+                var thisOverWidth=0.0f
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                    for(i in thisOverString.indices){
+                        val radius = 18f
 
-                    canvas.drawCircle(798+thisOverWidth,690f,radius,thisOverRectPaint)
-                    if(thisOverString[i].length==1){
-                        val xCoordinate=798+thisOverWidth-((thisOverPaint.measureText(thisOverString[i]))/2)
-                        val yCoordinate=690+(thisOverPaint.descent()+2.25f)
-                        canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint)
-                    }
-                    if(thisOverString[i].length==2){
-                        val xCoordinate=798+thisOverWidth-((thisOverPaint1.measureText(thisOverString[i]))/2)
-                        val yCoordinate=690+(thisOverPaint.descent()+2.25f)
-                        canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint1)
-                    }
-                    if(thisOverString[i].length==3){
-                        val xCoordinate=798+thisOverWidth-17
-                        val yCoordinate=690+(thisOverPaint.descent()+2.25f)
-                        canvas.drawText(thisOverString[i].first().toString(),xCoordinate,yCoordinate,thisOverPaint1)
-                        canvas.drawText(thisOverString[i].substring(1,3),xCoordinate-1+(thisOverPaint1.measureText(thisOverString[i].first().toString())),yCoordinate,thisOverPaint2)
-                    }
+                        canvas.drawCircle(798+thisOverWidth,690f,radius,thisOverRectPaint)
+                        if(thisOverString[i].length==1){
+                            val xCoordinate=798+thisOverWidth-((thisOverPaint.measureText(thisOverString[i]))/2+1)
+                            val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                            canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint)
+                        }
+                        if(thisOverString[i].length==2){
+                            val xCoordinate=798+thisOverWidth-((thisOverPaint1.measureText(thisOverString[i]))/2)
+                            val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                            canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint1)
+                        }
+                        if(thisOverString[i].length==3){
+                            val xCoordinate=798+thisOverWidth-17
+                            val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                            canvas.drawText(thisOverString[i].first().toString(),xCoordinate,yCoordinate,thisOverPaint1)
+                            canvas.drawText(thisOverString[i].substring(1,3),xCoordinate-1+(thisOverPaint1.measureText(thisOverString[i].first().toString())),yCoordinate,thisOverPaint2)
+                        }
 //                    canvas.drawRoundRect(
 //                        780+thisOverWidth,
 //                        (676).toFloat(),
@@ -918,8 +919,10 @@ class TextStreamObject : StreamObjectBase() {
 //                        thisOverRectPaint
 //                    )
 //                    canvas.drawText(thisOverString[i],780+thisOverWidth+4.5f,690+(thisOverPaint.descent()+0.75f),thisOverPaint)
-                    thisOverWidth+=43f
+                        thisOverWidth+=43f
+                    }
                 }
+
             }
 
 //            canvas.drawText("0w",798-((thisOverPaint1.measureText("0w"))/2),690+(thisOverPaint1.descent()+2.25f),thisOverPaint1)
