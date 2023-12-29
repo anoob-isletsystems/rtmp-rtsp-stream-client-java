@@ -798,7 +798,7 @@ class TextStreamObject : StreamObjectBase() {
         thisOverPaint1.color = textColor
         thisOverPaint1.alpha = 255
         val thisOverPaint2 = Paint(Paint.ANTI_ALIAS_FLAG)
-        thisOverPaint2.textSize = 14f
+        thisOverPaint2.textSize = 18f
         thisOverPaint2.color = textColor
         thisOverPaint2.alpha = 255
         val bottomMessagePaint = Paint(Paint.ANTI_ALIAS_FLAG) //teamNamePaint
@@ -904,10 +904,10 @@ class TextStreamObject : StreamObjectBase() {
                             canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint1)
                         }
                         if(thisOverString[i].length==3){
-                            val xCoordinate=798+thisOverWidth-17
-                            val yCoordinate=690+(thisOverPaint.descent()+2.25f)
-                            canvas.drawText(thisOverString[i].first().toString(),xCoordinate,yCoordinate,thisOverPaint1)
-                            canvas.drawText(thisOverString[i].substring(1,3),xCoordinate-1+(thisOverPaint1.measureText(thisOverString[i].first().toString())),yCoordinate,thisOverPaint2)
+                            val xCoordinate=798+thisOverWidth
+                            val yCoordinate=680+(thisOverPaint1.descent()+1.25f)
+                            canvas.drawText(thisOverString[i].first().toString(),xCoordinate-6.5f,yCoordinate,thisOverPaint2)
+                            canvas.drawText(thisOverString[i].substring(1,3),xCoordinate-.25f-((thisOverPaint2.measureText(thisOverString[i].substring(1,3))/2)),yCoordinate+15,thisOverPaint2)
                         }
 //                    canvas.drawRoundRect(
 //                        780+thisOverWidth,
