@@ -802,7 +802,7 @@ class TextStreamObject : StreamObjectBase() {
         thisOverPaint2.color = textColor
         thisOverPaint2.alpha = 255
         val bottomMessagePaint = Paint(Paint.ANTI_ALIAS_FLAG) //teamNamePaint
-        bottomMessagePaint.textSize = 16f
+        bottomMessagePaint.textSize = 18f
         bottomMessagePaint.color = Color.BLACK
         bottomMessagePaint.alpha = 255
         val scoreOverlayPaint=Paint()
