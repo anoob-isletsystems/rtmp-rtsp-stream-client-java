@@ -849,11 +849,11 @@ class TextStreamObject : StreamObjectBase() {
         if(lines2[0]!=' '.toString()){
             if(battingTeamImage!=null){
                 val resizedBattingTeamImage= Bitmap.createScaledBitmap(battingTeamImage,100,60,false)
-                canvas.drawBitmap(resizedBattingTeamImage,90f,640f,paint)
+                canvas.drawBitmap(resizedBattingTeamImage,40f,640f,paint)
             }
             if(bowlingTeamImage!=null){
                 val resizedTeamImage= Bitmap.createScaledBitmap(bowlingTeamImage,100,60,false)
-                canvas.drawBitmap(resizedTeamImage,1090f,640f,paint)
+                canvas.drawBitmap(resizedTeamImage,1140f,640f,paint)
             }
             if(scorecard!=null){
                 val lines3 = scorecard.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
@@ -874,8 +874,8 @@ class TextStreamObject : StreamObjectBase() {
                 canvas.drawText(teamShortName1,530f,658+(teamShortNamePaint.descent()+0.75f),teamShortNamePaint)
                 canvas.drawText(teamShortName2,(750-teamShortNameWidth).toFloat(),658+(teamShortNamePaint.descent()+0.75f),teamShortNamePaint)
             }
-            canvas.drawText(lines[0], 260f, 650+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
-            canvas.drawText(lines[1], 260f, 690+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            canvas.drawText(lines[0], 210f, 650+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
+            canvas.drawText(lines[1], 210f, 690+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
             canvas.drawText(lines2[0], 780f, 650+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
 //        canvas.drawText(lines2[1], 780f, 690+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
             val scoreTextOffset=(110-playerNamePaint.measureText(lines1[0]))/2
@@ -884,8 +884,8 @@ class TextStreamObject : StreamObjectBase() {
             canvas.drawText(lines1[1], 510+bottomMessageOffset, 695+( bottomMessagePaint.descent() + 0.75f) , bottomMessagePaint)
             if(lines2.size>1){
                 var thisOverString=lines2[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                if (thisOverString.size>6){
-                    thisOverString=thisOverString.slice(thisOverString.size-6 until thisOverString.size).toTypedArray()
+                if (thisOverString.size>7){
+                    thisOverString=thisOverString.slice(thisOverString.size-7 until thisOverString.size).toTypedArray()
                 }
                 var thisOverWidth=0.0f
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
