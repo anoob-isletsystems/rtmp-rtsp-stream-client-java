@@ -206,6 +206,35 @@ class TextObjectFilterRender : BaseObjectFilterRender() {
         text: String?,
         text1: String?,
         text2: String?,
+        typeface: Typeface?,
+        bitmap: Bitmap,
+        bitmap1: Bitmap?,
+        scorecard: String?,
+        battingTeamImage: Bitmap?,
+        bowlingTeamImage: Bitmap?
+    ) {
+        this.text = text
+        this.text1 = text1
+        this.text2 = text2
+        this.typeface = typeface
+        this.bitmap=bitmap
+        this.bitmap1= bitmap1
+        this.scorecard=scorecard
+        this.battingTeamImage=battingTeamImage
+        this.bowlingTeamImage=bowlingTeamImage
+        if (text != null) {
+            if (text1 != null) {
+                if (text2 != null) {
+                    (streamObject as TextStreamObject).load(text, text1, text2, typeface,bitmap,bitmap1,scorecard, battingTeamImage,bowlingTeamImage)
+                }
+            }
+        }
+        shouldLoad = true
+    }
+    fun setMultiText(
+        text: String?,
+        text1: String?,
+        text2: String?,
         textSize: Float,
         textColor: Int,
         typeface: Typeface?
