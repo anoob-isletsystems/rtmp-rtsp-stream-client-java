@@ -75,7 +75,17 @@ class TextObjectFilterRender : BaseObjectFilterRender() {
     ) {
         setMultiText(text, text1, text2, textSize, textColor, null)
     }
-
+    fun setMultiText(
+        text: String?,
+        text1: String?,
+        text2: String?,
+        textSize: Float,
+        textColor: Int,
+        typeface: Typeface?,
+        bitmap: Bitmap
+    ){
+        setMultiText(text,text1,text2,textSize,textColor,typeface,bitmap,null)
+    }
     fun setMultiText(
         text: String?,
         text1: String?,
