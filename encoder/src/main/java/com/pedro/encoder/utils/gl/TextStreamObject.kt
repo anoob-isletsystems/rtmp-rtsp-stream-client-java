@@ -1062,7 +1062,7 @@ class TextStreamObject : StreamObjectBase() {
             canvas.drawLine(850f,630f,1110f,630f,linePaint)
             canvas.drawText(lines[0], 170f, 600+( playerNamePaint2.descent() + 0.75f) , playerNamePaint2)
             canvas.drawText(lines[1], 170f, 670+( playerNamePaint1.descent() + 0.75f) , playerNamePaint1)
-            canvas.drawText(lines2[0], 850f, 600+( playerNamePaint2.descent() + 0.75f) , playerNamePaint2)
+            canvas.drawText(lines2[0], 1110-playerNamePaint2.measureText(lines2[0]), 600+( playerNamePaint2.descent() + 0.75f) , playerNamePaint2)
 //        canvas.drawText(lines2[1], 780f, 690+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
             var scoreSplit=lines1[0].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             canvas.drawText(scoreSplit[0], 630f, 610+( playerNamePaint2.descent() + 0.75f) , paint)
