@@ -1042,15 +1042,15 @@ class TextStreamObject : StreamObjectBase() {
             }
             if(scorecard!=null){
                 val lines3 = scorecard.split("\n".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                val teamFullName=lines3[0].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+//                val teamFullName=lines3[0].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                 val teamShortName=lines3[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                if(battingTeamImage==null){
-                    canvas.drawText(teamFullName[0].substring(0,teamFullName[0].length.coerceAtMost(3)), 10f, 670+(paint.descent()+0.75f), paint)
-                }
-                if(bowlingTeamImage==null){
-                    val teamNameWidth = (paint.measureText(teamFullName[1].substring(0,teamFullName[1].length.coerceAtMost(4))) + 0.5f).toInt()
-                    canvas.drawText(teamFullName[1].substring(0,teamFullName[1].length.coerceAtMost(3)), (1270-teamNameWidth).toFloat(), 670+(paint.descent()+0.75f), paint)
-                }
+//                if(battingTeamImage==null){
+//                    canvas.drawText(teamFullName[0].substring(0,teamFullName[0].length.coerceAtMost(3)), 10f, 670+(paint.descent()+0.75f), paint)
+//                }
+//                if(bowlingTeamImage==null){
+//                    val teamNameWidth = (paint.measureText(teamFullName[1].substring(0,teamFullName[1].length.coerceAtMost(4))) + 0.5f).toInt()
+//                    canvas.drawText(teamFullName[1].substring(0,teamFullName[1].length.coerceAtMost(3)), (1270-teamNameWidth).toFloat(), 670+(paint.descent()+0.75f), paint)
+//                }
                 val teamShortName1=teamShortName[0].substring(0,
                     teamShortName[0].length.coerceAtMost(3)
                 )
