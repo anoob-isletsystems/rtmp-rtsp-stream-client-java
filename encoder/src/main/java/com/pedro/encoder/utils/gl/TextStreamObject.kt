@@ -1070,15 +1070,20 @@ class TextStreamObject : StreamObjectBase() {
             canvas.drawText(lines1[1], 630f, 650+( playerNamePaint2.descent() + 0.75f) , playerNamePaint2)
             if(lines2.size>1){
                 var thisOverString=lines2[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                if (thisOverString.size>8){
-                    thisOverString=thisOverString.slice(thisOverString.size-8 until thisOverString.size).toTypedArray()
-                }
-                val spaceWeight=playerNamePaint.measureText(" ")
-                var thisOverWidth=0.0f
+                val spaceWeight=playerNamePaint2.measureText(" ")
+                var thisOverWidth=-spaceWeight
+                var allowedBallCount=0
+                val actualBallCount=thisOverString.size
                 for(i in thisOverString.indices){
-                    thisOverWidth+=playerNamePaint2.measureText(thisOverString[i])+spaceWeight
+                    thisOverWidth+=playerNamePaint2.measureText(thisOverString[actualBallCount-i-1])+spaceWeight
+                    if(thisOverWidth>255f){
+                        allowedBallCount=i
+                        thisOverWidth-=(playerNamePaint2.measureText(thisOverString[actualBallCount-i-1])+spaceWeight)
+                        break
+                    }
+                    allowedBallCount=i+1
                 }
-                thisOverWidth-=spaceWeight
+                thisOverString=thisOverString.slice(actualBallCount-allowedBallCount until actualBallCount).toTypedArray()
                 for(i in thisOverString.indices){
                     val xCoordinate=1110-thisOverWidth
                     val yCoordinate=670+( playerNamePaint2.descent() + 0.75f)
@@ -1086,7 +1091,6 @@ class TextStreamObject : StreamObjectBase() {
                     thisOverWidth-=(playerNamePaint2.measureText(thisOverString[i])+spaceWeight)
                 }
             }
-
         }
         else{
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && lines1[0]!=' '.toString()){
