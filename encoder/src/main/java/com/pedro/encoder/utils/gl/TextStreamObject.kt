@@ -903,13 +903,13 @@ class TextStreamObject : StreamObjectBase() {
             canvas.drawText(lines1[1], 510+bottomMessageOffset, 695+( bottomMessagePaint.descent() + 0.75f) , bottomMessagePaint)
             if(lines2.size>1){
                 var thisOverString=lines2[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
-                if (thisOverString.size>7){
-                    thisOverString=thisOverString.slice(thisOverString.size-7 until thisOverString.size).toTypedArray()
+                if (thisOverString.size>6){
+                    thisOverString=thisOverString.slice(thisOverString.size-6 until thisOverString.size).toTypedArray()
                 }
                 var thisOverWidth=0.0f
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                     for(i in thisOverString.indices){
-                        val radius = 18f
+                        val radius = 20f
 
                         canvas.drawCircle(798+thisOverWidth,690f,radius,thisOverRectPaint)
                         if(thisOverString[i].length==1){
@@ -919,17 +919,22 @@ class TextStreamObject : StreamObjectBase() {
                         }
                         if(thisOverString[i].length==2){
                             val xCoordinate=798+thisOverWidth-((thisOverPaint1.measureText(thisOverString[i]))/2)
-                            val yCoordinate=690+(thisOverPaint.descent()+2.25f)
+                            val yCoordinate=690+(thisOverPaint1.descent()+2.25f)
                             canvas.drawText(thisOverString[i],xCoordinate,yCoordinate,thisOverPaint1)
                         }
                         if(thisOverString[i].length==3){
                             val xCoordinate=798+thisOverWidth
-                            val yCoordinate=680+(thisOverPaint1.descent()+1.25f)
-                            canvas.drawText(thisOverString[i].first().toString(),xCoordinate-6.5f,yCoordinate,thisOverPaint2)
+                            val yCoordinate=680+(thisOverPaint1.descent()+2.25f)
+                            canvas.drawText(thisOverString[i].first().toString(),xCoordinate-((thisOverPaint2.measureText(thisOverString[i].first().toString())/2)),yCoordinate,thisOverPaint2)
                             canvas.drawText(thisOverString[i].substring(1,3),xCoordinate-.25f-((thisOverPaint2.measureText(thisOverString[i].substring(1,3))/2)),yCoordinate+15,thisOverPaint2)
                         }
-
-                        thisOverWidth+=43f
+                        if(thisOverString[i].length==4){
+                            val xCoordinate=798+thisOverWidth
+                            val yCoordinate=680+(thisOverPaint1.descent()+2.25f)
+                            canvas.drawText(thisOverString[i].substring(0,2),xCoordinate-((thisOverPaint2.measureText(thisOverString[i].substring(0,2))/2)),yCoordinate,thisOverPaint2)
+                            canvas.drawText(thisOverString[i].substring(2,4),xCoordinate-.25f-((thisOverPaint2.measureText(thisOverString[i].substring(2,4))/2)),yCoordinate+15,thisOverPaint2)
+                        }
+                        thisOverWidth+=47f
                     }
                 }
 
@@ -1064,7 +1069,7 @@ class TextStreamObject : StreamObjectBase() {
             canvas.drawText(lines[1], 170f, 670+( playerNamePaint1.descent() + 0.75f) , playerNamePaint1)
             canvas.drawText(lines2[0], 1110-playerNamePaint2.measureText(lines2[0]), 600+( playerNamePaint2.descent() + 0.75f) , playerNamePaint2)
 //        canvas.drawText(lines2[1], 780f, 690+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
-            var scoreSplit=lines1[0].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            val scoreSplit=lines1[0].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             canvas.drawText(scoreSplit[0], 630f, 610+( playerNamePaint2.descent() + 0.75f) , paint)
             canvas.drawText(scoreSplit[1],645+paint.measureText(scoreSplit[0]),610+( playerNamePaint2.descent() + 0.75f) , playerNamePaint2)
             canvas.drawText(lines1[1], 630f, 650+( playerNamePaint2.descent() + 0.75f) , playerNamePaint2)
@@ -1072,18 +1077,16 @@ class TextStreamObject : StreamObjectBase() {
                 var thisOverString=lines2[1].split(" ".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
                 val spaceWeight=playerNamePaint2.measureText(" ")
                 var thisOverWidth=-spaceWeight
-                var allowedBallCount=0
-                val actualBallCount=thisOverString.size
+                var allowedBallCount=thisOverString.size
                 for(i in thisOverString.indices){
-                    thisOverWidth+=playerNamePaint2.measureText(thisOverString[actualBallCount-i-1])+spaceWeight
+                    thisOverWidth+=playerNamePaint2.measureText(thisOverString[thisOverString.size-i-1])+spaceWeight
                     if(thisOverWidth>255f){
                         allowedBallCount=i
-                        thisOverWidth-=(playerNamePaint2.measureText(thisOverString[actualBallCount-i-1])+spaceWeight)
+                        thisOverWidth-=(playerNamePaint2.measureText(thisOverString[thisOverString.size-i-1])+spaceWeight)
                         break
                     }
-                    allowedBallCount=i+1
                 }
-                thisOverString=thisOverString.slice(actualBallCount-allowedBallCount until actualBallCount).toTypedArray()
+                thisOverString=thisOverString.slice(thisOverString.size-allowedBallCount until thisOverString.size).toTypedArray()
                 for(i in thisOverString.indices){
                     val xCoordinate=1110-thisOverWidth
                     val yCoordinate=670+( playerNamePaint2.descent() + 0.75f)
