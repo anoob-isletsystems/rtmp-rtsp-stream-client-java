@@ -345,7 +345,7 @@ class TextStreamObject : StreamObjectBase() {
         val canvas = Canvas(image)
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
         if(bitmap!=null) {
-        canvas.drawBitmap(bitmap,1180f,0f,paint)
+        canvas.drawBitmap(bitmap,1170f,10f,paint)
         }
         if (bitmap1!=null){
             val bitmapHeight=bitmap1.height
@@ -493,7 +493,7 @@ class TextStreamObject : StreamObjectBase() {
         val canvas = Canvas(image)
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
         if(bitmap!=null) {
-            canvas.drawBitmap(bitmap,1180f,0f,paint)
+            canvas.drawBitmap(bitmap,1170f,10f,paint)
         }
         if (bitmap1!=null){
             val bitmapHeight=bitmap1.height
@@ -690,7 +690,7 @@ class TextStreamObject : StreamObjectBase() {
         val canvas = Canvas(image)
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
         if(bitmap!=null) {
-            canvas.drawBitmap(bitmap,1180f,0f,paint)
+            canvas.drawBitmap(bitmap,1170f,10f,paint)
         }
         if (bitmap1!=null){
             val bitmapHeight=bitmap1.height
@@ -853,7 +853,7 @@ class TextStreamObject : StreamObjectBase() {
         val canvas = Canvas(image)
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
         if(bitmap!=null) {
-            canvas.drawBitmap(bitmap,1180f,0f,paint)
+            canvas.drawBitmap(bitmap,1170f,10f,paint)
         }
         if (bitmap1!=null){
             val bitmapHeight=bitmap1.height
@@ -1016,7 +1016,7 @@ class TextStreamObject : StreamObjectBase() {
         val scorecardOverlayCanvas = Canvas(scorecardOverlayImage)
         scorecardOverlayCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR)
         if(bitmap!=null) {
-            canvas.drawBitmap(bitmap,1180f,0f,paint)
+            canvas.drawBitmap(bitmap,1170f,10f,paint)
         }
         if (bitmap1!=null){
             val bitmapHeight=bitmap1.height
