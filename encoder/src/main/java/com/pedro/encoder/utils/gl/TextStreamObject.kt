@@ -894,9 +894,9 @@ class TextStreamObject : StreamObjectBase() {
                 val teamShortName1=teamShortName[0].substring(0,
                     teamShortName[0].length.coerceAtMost(4)
                 )
-                val teamShortName2=teamShortName[1].substring(0,teamShortName[1].length.coerceAtMost(4))
+//                val teamShortName2=teamShortName[1].substring(0,teamShortName[1].length.coerceAtMost(4))
                 canvas.drawText(teamShortName1,500+((60-teamShortNamePaint.measureText(teamShortName1))/2),645+(teamShortNamePaint.descent()+2.25f),teamShortNamePaint)
-                canvas.drawText(teamShortName2,720+((60-teamShortNamePaint.measureText(teamShortName2))/2),645+(teamShortNamePaint.descent()+2.25f),teamShortNamePaint)
+//                canvas.drawText(teamShortName2,720+((60-teamShortNamePaint.measureText(teamShortName2))/2),645+(teamShortNamePaint.descent()+2.25f),teamShortNamePaint)
             }
             canvas.drawText(lines[0], 210f, 632+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
             canvas.drawText(lines[1], 210f, 678+( playerNamePaint.descent() + 0.75f) , playerNamePaint)
