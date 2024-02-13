@@ -870,7 +870,7 @@ class TextStreamObject : StreamObjectBase() {
             val heightAdjust=(720-bitmapHeight)/2
             val widthAdjust=(1280-bitmapWidth)/2
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                canvas.drawRoundRect((widthAdjust+40).toFloat(),(heightAdjust+40).toFloat(),(widthAdjust+bitmapWidth-60).toFloat(),(heightAdjust+bitmapHeight-50).toFloat(),32f,32f,overlayBackgroundPaint)
+                canvas.drawRoundRect((widthAdjust).toFloat(),(heightAdjust).toFloat(),(widthAdjust+bitmapWidth).toFloat(),(heightAdjust+bitmapHeight).toFloat(),32f,32f,overlayBackgroundPaint)
             }
             canvas.drawBitmap(bitmap1,widthAdjust.toFloat(),heightAdjust.toFloat(),paint)
         }
