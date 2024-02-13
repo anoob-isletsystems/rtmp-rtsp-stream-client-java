@@ -830,6 +830,9 @@ class TextStreamObject : StreamObjectBase() {
         bottomMessagePaint.alpha = 255
         val scoreOverlayPaint=Paint()
         scoreOverlayPaint.alpha=255
+        val overlayBackgroundPaint=Paint(Paint.ANTI_ALIAS_FLAG)
+        overlayBackgroundPaint.color=Color.rgb(8,14,44)
+        overlayBackgroundPaint.alpha=200
         if (typeface != null) {
             paint.typeface = typeface
             playerNamePaint.typeface=typeface
@@ -866,6 +869,9 @@ class TextStreamObject : StreamObjectBase() {
             val bitmapWidth =bitmap1.width
             val heightAdjust=(720-bitmapHeight)/2
             val widthAdjust=(1280-bitmapWidth)/2
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                canvas.drawRoundRect((widthAdjust+40).toFloat(),(heightAdjust+40).toFloat(),(widthAdjust+bitmapWidth-60).toFloat(),(heightAdjust+bitmapHeight-50).toFloat(),32f,32f,overlayBackgroundPaint)
+            }
             canvas.drawBitmap(bitmap1,widthAdjust.toFloat(),heightAdjust.toFloat(),paint)
         }
         if (scoreOverlay!=null){
