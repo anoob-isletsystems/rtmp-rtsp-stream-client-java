@@ -872,7 +872,7 @@ class TextStreamObject : StreamObjectBase() {
             canvas.drawBitmap(bitmap1,widthAdjust.toFloat(),heightAdjust.toFloat(),paint)
         }
         if(bitmap!=null) {
-            canvas.drawBitmap(bitmap,1170f,10f,paint)
+            canvas.drawBitmap(bitmap,(1270-bitmap.width).toFloat(),10f,paint)
         }
         if (scoreOverlay!=null){
             canvas.drawBitmap(scoreOverlay,((1280-scoreOverlay.width)/2).toFloat(),595f,scoreOverlayPaint)
