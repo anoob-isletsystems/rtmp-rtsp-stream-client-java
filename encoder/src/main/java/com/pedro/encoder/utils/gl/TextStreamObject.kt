@@ -861,9 +861,6 @@ class TextStreamObject : StreamObjectBase() {
         val image = Bitmap.createBitmap(1280, 720, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(image)
         canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
-        if(bitmap!=null) {
-            canvas.drawBitmap(bitmap,1170f,10f,paint)
-        }
         if (bitmap1!=null){
             val bitmapHeight=bitmap1.height
             val bitmapWidth =bitmap1.width
@@ -873,6 +870,9 @@ class TextStreamObject : StreamObjectBase() {
                 canvas.drawRoundRect((widthAdjust).toFloat(),(heightAdjust).toFloat(),(widthAdjust+bitmapWidth).toFloat(),(heightAdjust+bitmapHeight).toFloat(),32f,32f,overlayBackgroundPaint)
             }
             canvas.drawBitmap(bitmap1,widthAdjust.toFloat(),heightAdjust.toFloat(),paint)
+        }
+        if(bitmap!=null) {
+            canvas.drawBitmap(bitmap,1170f,10f,paint)
         }
         if (scoreOverlay!=null){
             canvas.drawBitmap(scoreOverlay,((1280-scoreOverlay.width)/2).toFloat(),595f,scoreOverlayPaint)
